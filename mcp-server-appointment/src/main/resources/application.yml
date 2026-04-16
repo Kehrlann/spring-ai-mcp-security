@@ -20,6 +20,21 @@ spring:
           authserver:
             issuer-uri: ${ISSUER_URI:http://localhost:9000}
 
+  sql:
+    init:
+      mode: always
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./appointments
+    username: sa
+    password:
+
+#  spring.datasource.url=jdbc:h2:file:~/spring-boot-h2-db
+#  spring.datasource.username=sa
+#  spring.datasource.password=
+#  spring.datasource.driver-class-name=org.h2.Driver
+#  spring.jpa.hibernate.ddl-auto=update
+
 #logging:
 #  level:
 #    org.springframework.security: TRACE

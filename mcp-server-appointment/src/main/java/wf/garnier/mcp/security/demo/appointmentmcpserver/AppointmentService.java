@@ -60,7 +60,8 @@ public class AppointmentService {
 	}
 
 	public Optional<AppointmentSlot> findSlotByNameAndDateTime(String name, LocalDateTime dateTime) {
-		return slotRepository.findAll().stream()
+		return slotRepository.findAll()
+			.stream()
 			.filter(slot -> slot.name().equalsIgnoreCase(name) && slot.dateTime().equals(dateTime))
 			.findFirst();
 	}

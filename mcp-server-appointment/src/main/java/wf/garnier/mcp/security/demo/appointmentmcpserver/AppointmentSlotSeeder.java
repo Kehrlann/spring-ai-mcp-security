@@ -9,18 +9,29 @@ import java.time.temporal.TemporalAdjusters;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class AppointmentSlotSeeder implements ApplicationRunner {
 
-	private final AppointmentSlotRepository repository;
+	private final AppointmentSlotRepository appointmentSlotRepository;
 
-	public AppointmentSlotSeeder(AppointmentSlotRepository repository) {
-		this.repository = repository;
+	private final AppointmentRepository appointmentRepository;
+
+	public AppointmentSlotSeeder(AppointmentSlotRepository appointmentSlotRepository,
+			AppointmentRepository appointmentRepository) {
+		this.appointmentSlotRepository = appointmentSlotRepository;
+		this.appointmentRepository = appointmentRepository;
 	}
 
-	@Override
-	public void run(ApplicationArguments args) throws Exception {
+	@Transactional
+	public void reset() {
+		appointmentRepository.deleteAll();
+		appointmentSlotRepository.deleteAll();
+		seed();
+	}
+
+	private void seed() {
 		LocalDate today = LocalDate.now();
 		LocalDate startWednesday = today.with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY));
 		LocalDate startSaturday = today.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
@@ -32,20 +43,27 @@ public class AppointmentSlotSeeder implements ApplicationRunner {
 			LocalDate saturday = startSaturday.plusWeeks(week);
 			LocalDate sunday = startSunday.plusWeeks(week);
 
-			repository.create(new AppointmentSlot(null, "Entraînement roller-soccer",
+			appointmentSlotRepository.save(new AppointmentSlot(null, "Entraînement roller-soccer",
 					LocalDateTime.of(wednesday, LocalTime.of(19, 0))));
 
-			repository.create(new AppointmentSlot(null, "Entraînement rollball",
+			appointmentSlotRepository.save(new AppointmentSlot(null, "Entraînement rollball",
 					LocalDateTime.of(wednesday, LocalTime.of(20, 30))));
 
-			repository.create(new AppointmentSlot(null, "Cours roller street",
-					LocalDateTime.of(saturday, LocalTime.of(14, 0))));
+			appointmentSlotRepository.save(
+					new AppointmentSlot(null, "Cours roller street", LocalDateTime.of(saturday, LocalTime.of(14, 0))));
 
-			repository.create(new AppointmentSlot(null, "Cours adultes: tous niveaux",
+			appointmentSlotRepository.save(new AppointmentSlot(null, "Cours adultes: tous niveaux",
 					LocalDateTime.of(sunday, LocalTime.of(14, 0))));
 
-			repository.create(new AppointmentSlot(null, "Cours avancé",
-					LocalDateTime.of(sunday, LocalTime.of(15, 30))));
+			appointmentSlotRepository
+				.save(new AppointmentSlot(null, "Cours avancé", LocalDateTime.of(sunday, LocalTime.of(15, 30))));
+		}
+	}
+
+	@Override
+	public void run(ApplicationArguments args) throws Exception {
+		if (this.appointmentSlotRepository.count() == 0) {
+			this.seed();
 		}
 	}
 

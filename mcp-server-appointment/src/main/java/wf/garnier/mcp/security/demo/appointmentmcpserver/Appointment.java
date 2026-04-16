@@ -1,5 +1,11 @@
 package wf.garnier.mcp.security.demo.appointmentmcpserver;
 
-public record Appointment(Integer appointmentId, String userEmail) {
+import org.springframework.data.annotation.Id;
+
+public record Appointment(@Id Integer id, Integer appointmentId, String userEmail) {
+
+	public Appointment(Integer appointmentId, String userEmail) {
+		this(null, appointmentId, userEmail);
+	}
 
 }

@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class AppointmentMcpServerApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(AppointmentMcpServerApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(AppointmentMcpServerApplication.class, args);
+	}
 
 }

@@ -20,9 +20,13 @@ public class AppointmentSlotController {
 
 	private final AppointmentService appointmentService;
 
-	public AppointmentSlotController(AppointmentSlotRepository slotRepository, AppointmentService appointmentService) {
+	private final AppointmentSlotSeeder appointmentSlotSeeder;
+
+	public AppointmentSlotController(AppointmentSlotRepository slotRepository, AppointmentService appointmentService,
+			AppointmentSlotSeeder appointmentSlotSeeder) {
 		this.slotRepository = slotRepository;
 		this.appointmentService = appointmentService;
+		this.appointmentSlotSeeder = appointmentSlotSeeder;
 	}
 
 	@GetMapping("/")
@@ -56,6 +60,12 @@ public class AppointmentSlotController {
 		if (user != null) {
 			appointmentService.unbookAppointment(slotId, user.getEmail());
 		}
+		return "redirect:/";
+	}
+
+	@GetMapping("/reset")
+	public String reset() {
+		appointmentSlotSeeder.reset();
 		return "redirect:/";
 	}
 
