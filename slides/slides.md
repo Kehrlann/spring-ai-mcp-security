@@ -43,7 +43,6 @@ Software Engineer
 
 ---
 
-
 ## References
 
 &nbsp;
@@ -55,6 +54,15 @@ Software Engineer
 - <logos-bluesky /> @garnier.wf
 - <logos-firefox /> https://garnier.wf/
 - <fluent-emoji-flat-envelope-with-arrow /> contact@garnier.wf
+
+---
+
+# Serveurs MCP Sécurisés
+
+1. Intro à ModelContextProtocol (MCP)
+1. MCP avec Spring AI
+1. Identité et permissions dans MCP
+1. MCP sécurisé avec Spring AI
 
 ---
 layout: two-cols
@@ -70,11 +78,11 @@ layout: two-cols
     <img src="/manning-affiliate-qr-code.png" style="display: block;" >
     <div>https://hubs.la/Q04bFz560</div>
     <br>
-    <div>45% off everything with code</div>
+    <div>45% de remise!</div>
     <br>
-    <div><b>springio26</b></div>
+    <div><b>devoxxfr26</b></div>
     <br>
-    <div>(until May 2nd)</div>
+    <div>(jusqu'au 9 mai)</div>
 </div>
 
 
