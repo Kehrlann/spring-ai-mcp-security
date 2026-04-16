@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Slots</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #4CAF50;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Available Appointment Slots</h1>
+    <div th:if="${userEmail}" class="user-info">
+        <span th:text="'Logged in as: ' + ${userEmail}">Logged in as: user@example.com</span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Date & Time</th>
+                <th th:if="${userEmail}">Booked</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="slot : ${slots}">
+                <td th:text="${slot.id()}">1</td>
+                <td th:text="${slot.name()}">Slot Name</td>
+                <td th:text="${#temporals.format(slot.dateTime(), 'EEE dd MMM, HH:mm')}">Wed 08 Oct, 19:00</td>
+                <td th:if="${userEmail}">
+                    <form th:action="${bookings[slot.id()] ? '/unbook' : '/book'}" method="post" style="margin: 0;">
+                        <input type="hidden" name="slotId" th:value="${slot.id()}" />
+                        <label class="toggle-switch">
+                            <input type="checkbox" th:checked="${bookings[slot.id()]}" onchange="this.form.submit()">
+                            <span class="slider"></span>
+                        </label>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
