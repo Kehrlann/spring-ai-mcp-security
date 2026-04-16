@@ -13,6 +13,20 @@
     <artifactId>mcp-server-appointment</artifactId>
     <name>mcp-server-appointment</name>
     <description>A server for making appointments</description>
+    <properties>
+        <spring-ai.version>2.0.0-M4</spring-ai.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -43,6 +57,13 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
+        </dependency>
+
+
+        <!-- tests -->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
@@ -58,6 +79,8 @@
             <artifactId>spring-boot-starter-data-jdbc-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+
 
     </dependencies>
 
