@@ -7,7 +7,7 @@ spring:
         client:
           default-client:
             token:
-              access-token-time-to-live: 1h
+              access-token-time-to-live: 2h
             registration:
               client-id: "default-client"
               client-secret: "{noop}default-secret"

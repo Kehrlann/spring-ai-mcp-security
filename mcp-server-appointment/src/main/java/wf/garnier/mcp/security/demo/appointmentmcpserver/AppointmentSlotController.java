@@ -47,7 +47,7 @@ public class AppointmentSlotController {
 		return "index";
 	}
 
-	@PostMapping("/book")
+	@PostMapping("/api/book")
 	public String bookAppointment(@RequestParam Integer slotId, @AuthenticationPrincipal OidcUser user) {
 		if (user != null) {
 			appointmentService.bookAppointment(slotId, user.getEmail());
@@ -55,7 +55,7 @@ public class AppointmentSlotController {
 		return "redirect:/";
 	}
 
-	@PostMapping("/unbook")
+	@PostMapping("/api/unbook")
 	public String unbookAppointment(@RequestParam Integer slotId, @AuthenticationPrincipal OidcUser user) {
 		if (user != null) {
 			appointmentService.unbookAppointment(slotId, user.getEmail());
@@ -63,7 +63,7 @@ public class AppointmentSlotController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/reset")
+	@GetMapping("/api/reset")
 	public String reset() {
 		appointmentSlotSeeder.reset();
 		return "redirect:/";

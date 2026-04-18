@@ -2,6 +2,7 @@ package wf.garnier.mcp.security.demo.authorizationserver;
 
 import java.util.List;
 
+import org.springaicommunity.mcp.security.authorizationserver.config.McpAuthorizationServerConfigurer;
 import wf.garnier.mcp.security.demo.authorizationserver.user.DemoUser;
 import wf.garnier.mcp.security.demo.authorizationserver.user.DemoUserDetailsService;
 
@@ -10,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.core.oidc.StandardClaimNames;
 import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
@@ -18,13 +21,20 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
-@EnableWebSecurity
 class SecurityConfiguration {
 
 	@Bean
 	Customizer<HttpSecurity> httpSecurityCustomizer() {
 		return http -> {
 			http.cors(cors -> cors.configurationSource(_ -> configurationSource()));
+			http.csrf(CsrfConfigurer::disable);
+		};
+	}
+
+	@Bean
+	Customizer<McpAuthorizationServerConfigurer> mcpCustomizer() {
+		return mcpAuthServer -> {
+			mcpAuthServer.authorizationServer(authServer -> authServer.oidc(Customizer.withDefaults()));
 		};
 	}
 
@@ -39,8 +49,8 @@ class SecurityConfiguration {
 		return ctx -> {
 			DemoUser user = (DemoUser) ctx.getPrincipal().getPrincipal();
 			ctx.getClaims().subject(user.getUserEmail());
+			ctx.getClaims().claim(StandardClaimNames.EMAIL, user.getUserEmail());
 			if (ctx.getTokenType().getValue().equals(OidcParameterNames.ID_TOKEN)) {
-				ctx.getClaims().claim(StandardClaimNames.EMAIL, user.getUserEmail());
 				ctx.getClaims().claim(StandardClaimNames.EMAIL_VERIFIED, true);
 				ctx.getClaims().claim(StandardClaimNames.NAME, user.getUsername());
 			}

@@ -99,7 +99,7 @@
                 <td th:text="${slot.name()}">Slot Name</td>
                 <td th:text="${#temporals.format(slot.dateTime(), 'EEE dd MMM, HH:mm')}">Wed 08 Oct, 19:00</td>
                 <td th:if="${userEmail}">
-                    <form th:action="${bookings[slot.id()] ? '/unbook' : '/book'}" method="post" style="margin: 0;">
+                    <form th:action="${bookings[slot.id()] ? '/api/unbook' : '/api/book'}" method="post" style="margin: 0;">
                         <input type="hidden" name="slotId" th:value="${slot.id()}" />
                         <label class="toggle-switch">
                             <input type="checkbox" th:checked="${bookings[slot.id()]}" onchange="this.form.submit()">
