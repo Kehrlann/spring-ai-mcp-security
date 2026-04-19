@@ -25,6 +25,7 @@
 
     <modules>
         <module>mcp-server-appointment</module>
+        <module>authorization-server</module>
     </modules>
 
     <dependencyManagement>
@@ -60,6 +61,21 @@
                         <inherited>true</inherited>
                         <goals>
                             <goal>validate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>false</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
