@@ -2,7 +2,6 @@ package wf.garnier.mcp.security.demo.authorizationserver;
 
 import java.util.List;
 
-import org.springaicommunity.mcp.security.authorizationserver.config.McpAuthorizationServerConfigurer;
 import wf.garnier.mcp.security.demo.authorizationserver.user.DemoUser;
 import wf.garnier.mcp.security.demo.authorizationserver.user.DemoUserDetailsService;
 
@@ -26,13 +25,6 @@ class SecurityConfiguration {
 		return http -> {
 			http.cors(cors -> cors.configurationSource(_ -> configurationSource()));
 			http.csrf(CsrfConfigurer::disable);
-		};
-	}
-
-	@Bean
-	Customizer<McpAuthorizationServerConfigurer> mcpCustomizer() {
-		return mcpAuthServer -> {
-			mcpAuthServer.authorizationServer(authServer -> authServer.oidc(Customizer.withDefaults()));
 		};
 	}
 
