@@ -38,11 +38,6 @@
             <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springaicommunity</groupId>
-            <artifactId>mcp-authorization-server-spring-boot</artifactId>
-            <version>${mcp-security.version}</version>
-        </dependency>
     </dependencies>
 
     <build>
