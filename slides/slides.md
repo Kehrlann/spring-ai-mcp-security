@@ -56,6 +56,17 @@ Software Engineer
 
 ---
 
+## Serveurs MCP Sécurisés
+
+<br>
+
+1. **Intro à ModelContextProtocol (MCP)**
+1. MCP avec Spring AI
+1. Identité et permissions dans MCP
+1. MCP sécurisé avec Spring AI
+
+---
+
 ## Model Context Protocol
 
 <br>
@@ -129,7 +140,7 @@ image: /mcp-flow-8.png
 <br>
 
 1. Intro à ModelContextProtocol (MCP)
-1. MCP avec Spring AI
+1. **MCP avec Spring AI**
 1. Identité et permissions dans MCP
 1. MCP sécurisé avec Spring AI
 
@@ -170,7 +181,7 @@ Programmation par annotations:
 
 1. Intro à ModelContextProtocol (MCP)
 1. MCP avec Spring AI
-1. Identité et permissions dans MCP
+1. **Identité et permissions dans MCP**
 1. MCP sécurisé avec Spring AI
 
 ---
@@ -181,7 +192,7 @@ Programmation par annotations:
 
 [Spécification MCP](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)
 
-Basé sur OAuth2: le client MCP envoie un token serveur.
+Basé sur OAuth2: le client MCP envoie un token au serveur MCP.
 
 ---
 
@@ -212,7 +223,7 @@ image: /oauth-3.png
 layout: cover
 ---
 
-Dans le cas de MCP ...
+## **⚠️ Dans le cas de MCP**
 
 ---
 layout: image
@@ -260,7 +271,7 @@ class: smaller
 
 <br>
 
-Évolution sur 3 versions de specs <v-click at="3">... _(c'est pas tout à fait cuit)_ ...</v-click>
+Évolution sur 3 versions de specs <v-click at="3">... 🤡 _c'est pas tout à fait cuit _ 🤡 ...</v-click>
 
 <v-clicks at="0">
 
@@ -285,7 +296,7 @@ class: smaller
 1. Intro à ModelContextProtocol (MCP)
 1. MCP avec Spring AI
 1. Identité et permissions dans MCP
-1. MCP sécurisé avec Spring AI
+1. **MCP sécurisé avec Spring AI**
 
 ---
 
@@ -331,7 +342,9 @@ Il faut:
 
 <!-- qrencode -s 9 -m 2 -o public/rating-devoxxfr.png "https://m.devoxx.com/events/devoxxfr2026/talks/5555/serveurs-mcp-scuriss-avec-spring-ai" -->
 <div style="float:right; margin-right: 50px; text-align: center;">
-  <img src="/rating-devoxxfr.png" style="margin-top: -20px; max-height: 250px;" >
+  <a href="https://m.devoxx.com/events/devoxxfr2026/talks/5555/serveurs-mcp-scuriss-avec-spring-ai" target="_blank">
+      <img src="/rating-devoxxfr.png" style="margin-top: -20px; max-height: 250px;" >
+  </a>
 </div>
 
 
