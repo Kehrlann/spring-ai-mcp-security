@@ -29,14 +29,6 @@ spring:
     username: sa
     password:
 
-  ai:
-    mcp:
-      server:
-        type: sync
-        protocol: stateless
-        name: apppointment-server
-
-
-logging:
-  level:
-    org.springframework.security: TRACE
+#logging:
+#  level:
+#    org.springframework.security: TRACE
