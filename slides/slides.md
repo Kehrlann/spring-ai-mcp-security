@@ -329,6 +329,12 @@ Il faut:
 
 &nbsp;
 
+<!-- qrencode -s 9 -m 2 -o public/rating-devoxxfr.png "https://m.devoxx.com/events/devoxxfr2026/talks/5555/serveurs-mcp-scuriss-avec-spring-ai" -->
+<div style="float:right; margin-right: 50px; text-align: center;">
+  <img src="/rating-devoxxfr.png" style="margin-top: -20px; max-height: 250px;" >
+</div>
+
+
 - <logos-bluesky /> @garnier.wf
 - <logos-firefox /> https://garnier.wf/
 - <fluent-emoji-flat-envelope-with-arrow /> contact@garnier.wf
