@@ -271,7 +271,7 @@ class: smaller
 
 <br>
 
-Évolution sur 3 versions de specs <v-click at="3">... 🤡 _c'est pas tout à fait cuit _ 🤡 ...</v-click>
+Évolution sur 3 versions de specs <v-click at="3">... 🤡 _c'est pas tout à fait cuit_ 🤡 ...</v-click>
 
 <v-clicks at="0">
 
