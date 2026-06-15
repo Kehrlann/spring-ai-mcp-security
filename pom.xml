@@ -15,12 +15,13 @@
         <java.version>25</java.version>
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
-        <mcp-security.version>0.1.8-SNAPSHOT</mcp-security.version>
+        <mcp-security.version>0.1.13</mcp-security.version>
 
         <spring-javaformat-maven-plugin.version>0.0.47</spring-javaformat-maven-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>4.1.0-M4</spring-boot.version>
+        <spring-boot.version>4.1.0</spring-boot.version>
+        <spring-ai.version>2.0.0</spring-ai.version>
     </properties>
 
     <modules>
