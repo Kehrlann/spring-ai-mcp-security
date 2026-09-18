@@ -1,6 +1,7 @@
 package wf.garnier.mcp.security.demo.authorizationserver;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.springaicommunity.mcp.security.authorizationserver.config.McpAuthorizationServerConfigurer;
 import wf.garnier.mcp.security.demo.authorizationserver.user.DemoUser;
@@ -14,12 +15,18 @@ import org.springframework.security.config.annotation.web.configurers.CsrfConfig
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.core.oidc.StandardClaimNames;
 import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
+import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientRegistrationAuthenticationContext;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.web.cors.CorsConfiguration;
+import static org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientRegistrationAuthenticationValidator.DEFAULT_JWK_SET_URI_VALIDATOR;
+import static org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientRegistrationAuthenticationValidator.DEFAULT_REDIRECT_URI_VALIDATOR;
 
 @Configuration
 class SecurityConfiguration {
+
+	private final Consumer<OAuth2ClientRegistrationAuthenticationContext> ALL_SCOPES_ALLOWED_VALIDATOR = DEFAULT_REDIRECT_URI_VALIDATOR
+		.andThen(DEFAULT_JWK_SET_URI_VALIDATOR);
 
 	@Bean
 	Customizer<HttpSecurity> httpSecurityCustomizer() {
@@ -33,6 +40,7 @@ class SecurityConfiguration {
 	Customizer<McpAuthorizationServerConfigurer> mcpCustomizer() {
 		return mcpAuthServer -> {
 			mcpAuthServer.authorizationServer(authServer -> authServer.oidc(Customizer.withDefaults()));
+			mcpAuthServer.dynamicClientRegistrationValidator(ALL_SCOPES_ALLOWED_VALIDATOR);
 		};
 	}
 
