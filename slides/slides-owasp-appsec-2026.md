@@ -95,43 +95,94 @@ By Anthropic, now AAIF
 
 ---
 layout: image
-image: /mcp-flow-1.png
+image: /mcp-flow-cc-1.png
 ---
 
 ---
 layout: image
-image: /mcp-flow-2.png
+image: /mcp-flow-cc-2.png
 ---
 
 ---
 layout: image
-image: /mcp-flow-3.png
+image: /mcp-flow-cc-3.png
 ---
 
 ---
 layout: image
-image: /mcp-flow-4.png
+image: /mcp-flow-cc-4.png
 ---
 
 ---
 layout: image
-image: /mcp-flow-5.png
+image: /mcp-flow-cc-5.png
 ---
 
 ---
 layout: image
-image: /mcp-flow-6.png
+image: /mcp-flow-cc-6.png
 ---
 
 ---
 layout: image
-image: /mcp-flow-7.png
+image: /mcp-flow-cc-7.png
 ---
 
 ---
 layout: image
-image: /mcp-flow-8.png
+image: /mcp-flow-cc-8.png
 ---
+
+---
+layout: cover
+---
+
+# How it runs
+
+---
+layout: image
+image: mcp-architecture-clarification.png
+class: background-contain
+---
+
+---
+layout: image
+image: mcp-stdio-vs-http-1.png
+class: background-contain
+---
+
+---
+layout: image
+image: mcp-stdio-vs-http-2.png
+class: background-contain
+---
+
+---
+layout: image
+image: mcp-stdio-vs-http-3.png
+class: background-contain
+---
+
+---
+
+# A word on STDIO
+
+&nbsp;
+
+<v-clicks>
+
+- Google "XYZ MCP", community-driven https://registry.modelcontextprotocol.io
+- `npx run ...`, no integrity checks
+- `-e API_KEY=...`, no standard auth
+- Full permissions, "it's not a sandbox"
+
+</v-clicks>
+
+<v-click>
+
+## 🤘 **STD-YOLO**
+
+</v-click>
 
 
 ---
@@ -148,11 +199,11 @@ image: /mcp-flow-8.png
 
 ---
 
-## Identity and permissions in MCP
+## Authorization in MCP-over-HTTP
 
 <br>
 
-[MCP Specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)
+[MCP Specification](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization)
 
 Based on OAuth2: the MCP client sends a token to the MCP server.
 
@@ -226,6 +277,117 @@ No pre-registration needed, either:
     - Client sends `client_id=https://client.example.com/client`
 
 ---
+layout: two-cols-header
+class: smaller
+---
+
+## Dynamic Client Registration (DCR)
+
+[**RFC 7591** OAuth 2.0 Dynamic Client Registration Protocol](https://datatracker.ietf.org/doc/html/rfc7591)
+
+
+::left::
+
+<v-click>
+
+```
+POST /<registration_endpoint>
+{
+  "redirect_uris": [...],
+  "grant_types": [...],
+  "scope": "read write",
+  "client_name": "MCP Ex",
+  ...
+}
+```
+
+</v-click>
+
+::right::
+
+<v-click>
+
+```
+200 OK
+{
+  "client_id": ...,
+  "client_secret": ...,
+  ...
+}
+```
+
+</v-click>
+
+
+<style>
+.two-cols-header {
+    grid-template-rows: auto 1fr;
+    column-gap: 50px;
+    row-gap: 20px;
+}
+pre {
+    background-color: #eee;
+    font-size: .9rem;
+    padding: 10px;
+}
+</style>
+
+---
+
+## Dynamic Client Registration (DCR)
+
+[**RFC 7591** OAuth 2.0 Dynamic Client Registration Protocol](https://datatracker.ietf.org/doc/html/rfc7591)
+
+<br>
+
+<v-clicks>
+
+- Open registration: DoS?
+- Registration policies?
+- Lifecycle management?
+
+</v-clicks>
+
+---
+
+## Client ID Metadata Document
+
+[**Draft** Client ID Metadata Document (CIMD)](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/)
+
+<br>
+
+- Client exposes a metadata document
+    - https://client.example.com/cimd.json
+- Uses the URI as its client ID: no pre-registration!
+- Auth server fetches document and validates
+
+---
+
+## Client ID Metadata Document
+
+[**Draft** Client ID Metadata Document (CIMD)](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/)
+
+<br>
+
+<v-clicks depth="2">
+
+- Client policies?
+- SSRF
+    - No localhost support
+- Time-of-check to time-of-use (TOCTOU)
+
+
+</v-clicks>
+
+<v-click>
+
+Keycloak: it's a work-in-progress ([#47765](https://github.com/keycloak/keycloak/issues/47765))
+
+</v-click>
+
+
+
+---
 
 ## Evolution across spec versions
 
@@ -238,8 +400,8 @@ No pre-registration needed, either:
 - V2 (2025-06)
     - Actually no, separate auth server
     - "Dynamic Client Registration" (DCR)
-- V3 (2025-11):
-    - Actually no, no DCR
+- V3 (2025-11)
+    - Actually no, don't do DCR
     - "Client ID Metadata Document" (CIMD)
 
 </v-clicks>
@@ -252,7 +414,7 @@ No pre-registration needed, either:
 
 <v-clicks depth="2">
 
-- V4 (2026-07):
+- V4 (2026-07)
     - No major change 🎉
     - Security Best Practices
         - Refresh token guidance
