@@ -4,6 +4,8 @@
     "token_endpoint_auth_method": "none",
     "redirect_uris": [
       "http://127.0.0.1:6274/oauth/callback",
-      "http://localhost:6274/oauth/callback"
+      "http://localhost:6274/oauth/callback",
+      "http://127.0.0.1:8090/oauth/callback",
+      "http://localhost:8090/oauth/callback"
     ]
 }
