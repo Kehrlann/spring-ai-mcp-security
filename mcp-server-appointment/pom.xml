@@ -57,11 +57,6 @@
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springaicommunity</groupId>
-            <artifactId>mcp-server-security-spring-boot</artifactId>
-            <version>${mcp-security.version}</version>
-        </dependency>
 
 
         <!-- tests -->
