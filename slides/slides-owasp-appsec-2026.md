@@ -22,7 +22,7 @@ OWASP AppSecDays France, 2026-09-24
 
 ---
 layout: image-right
-image: /daniel-intro.jpg
+image: /daniel-intro-small.jpg
 hideInToc: true
 class: smaller
 ---
@@ -44,27 +44,13 @@ Software Engineer
 
 ---
 
-## Secure MCP servers with Spring AI
+## Authz and Security for MCP
 
 <br>
 
 1. MCP tl;dr
-1. Identity and permissions in MCP
-1. Spring MCP-compatible auth server
-1. Securing the MCP server
-1. Securing the MCP client
-
----
-
-## Secure MCP servers with Spring AI
-
-<br>
-
-1. **MCP tl;dr**
-1. Identity and permissions in MCP
-1. Spring MCP-compatible auth server
-1. Securing the MCP server
-1. Securing the MCP client
+1. STDIO security profile
+1. HTTP authorization
 
 ---
 
@@ -165,6 +151,16 @@ class: background-contain
 
 ---
 
+## Authz and Security for MCP
+
+<br>
+
+1. MCP tl;dr
+1. STDIO security profile
+1. HTTP authorization
+
+---
+
 # A word on STDIO
 
 &nbsp;
@@ -187,15 +183,13 @@ class: background-contain
 
 ---
 
-## Secure MCP servers with Spring AI
+## Authz and Security for MCP
 
 <br>
 
 1. MCP tl;dr
-1. **Identity and permissions in MCP**
-1. Spring MCP-compatible auth server
-1. Securing the MCP server
-1. Securing the MCP client
+1. STDIO security profile
+1. HTTP authorization
 
 ---
 
@@ -356,10 +350,14 @@ pre {
 
 <br>
 
+<v-click>
+
 - Client exposes a metadata document
     - https://client.example.com/cimd.json
 - Uses the URI as its client ID: no pre-registration!
 - Auth server fetches document and validates
+
+</v-click>
 
 ---
 
@@ -420,132 +418,11 @@ Keycloak: it's a work-in-progress ([#47765](https://github.com/keycloak/keycloak
         - Refresh token guidance
         - Mix-Up attacks
         - ...
-    - "Enterprise auth" extension (XAA)
+    - "Enterprise auth" extension
+        - [Cross-App Access (XAA)](https://xaa.dev/)
 
 </v-clicks>
 
-
----
-
-## Secure MCP servers with Spring AI
-
-<br>
-
-1. MCP tl;dr
-1. Identity and permissions in MCP
-1. **Spring MCP-compatible auth server**
-1. Securing the MCP server
-1. Securing the MCP client
-
----
-
-## Spring Authz Server + MCP Security
-
-&nbsp;
-
-https://github.com/spring-ai-community/mcp-security
-
-```xml
-
-<dependency>
-    <groupId>org.springaicommunity</groupId>
-    <artifactId>mcp-authorization-server-spring-boot</artifactId>
-    <version>${mcp-security.version}</version>
-</dependency>
-```
-
----
-
-## Spring Authz Server + MCP Security
-
-<br>
-
-Supports:
-- Pre-registered clients
-- DCR
-- CIMD
-
----
-
-## Secure MCP servers with Spring AI
-
-<br>
-
-1. MCP tl;dr
-1. Identity and permissions in MCP
-1. Spring MCP-compatible auth server
-1. **Securing the MCP server**
-1. Securing the MCP client
-
----
-
-## MCP Server Security
-
-&nbsp;
-
-https://github.com/spring-ai-community/mcp-security
-
-```xml
-
-<dependency>
-    <groupId>org.springaicommunity</groupId>
-    <artifactId>mcp-server-security-spring-boot</artifactId>
-    <version>${mcp-security.version}</version>
-</dependency>
-```
-
----
-
-## MCP Server Security
-
-<br>
-
-Supports:
-- Resource server
-- Protected resource metadata
-
-WebMvc only!
-
----
-
-## Secure MCP servers with Spring AI
-
-<br>
-
-1. MCP tl;dr
-1. Identity and permissions in MCP
-1. Spring MCP-compatible auth server
-1. Securing the MCP server
-1. **Securing the MCP client**
-
----
-
-## MCP Client Security
-
-&nbsp;
-
-https://github.com/spring-ai-community/mcp-security
-
-```xml
-
-<dependency>
-    <groupId>org.springaicommunity</groupId>
-    <artifactId>mcp-client-security-spring-boot</artifactId>
-    <version>${mcp-security.version}</version>
-</dependency>
-```
-
----
-
-## MCP Server Security
-
-<br>
-
-Supports:
-- DCR
-- CIMD
-
-WebMvc + JDK's HttpClient
 
 ---
 
@@ -555,8 +432,11 @@ WebMvc + JDK's HttpClient
 
 #### **<logos-github-icon /> https://github.com/Kehrlann/spring-ai-mcp-security**
 
-&nbsp;
+<div style="float:right; margin-right: 50px; text-align: center;">
+    <img src="/qr-code-owasp.png" style="margin-bottom: -45px; height: 300px;" >
+</div>
 
+<br>
 
 - <logos-bluesky /> @garnier.wf
 - <logos-firefox /> https://garnier.wf/
@@ -571,14 +451,3 @@ class: end
 
 # **Merci 😊**
 
----
-
-Notes:
-- Explain DCR
-- Explain CIMD
-- XAA
-- Mix up attacks
-
-Keycloak:
-- MCP Authorization specification support: https://github.com/keycloak/keycloak/issues/41521
-- Promote CIMD to preview feature: https://github.com/keycloak/keycloak/issues/47765
