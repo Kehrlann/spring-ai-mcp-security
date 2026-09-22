@@ -51,6 +51,18 @@ Software Engineer
 1. MCP tl;dr
 1. STDIO security profile
 1. HTTP authorization
+1. What's next?
+
+---
+
+## Authz and Security for MCP
+
+<br>
+
+1. **MCP tl;dr**
+1. STDIO security profile
+1. HTTP authorization
+1. What's next?
 
 ---
 
@@ -156,8 +168,9 @@ class: background-contain
 <br>
 
 1. MCP tl;dr
-1. STDIO security profile
+1. **STDIO security profile**
 1. HTTP authorization
+1. What's next?
 
 ---
 
@@ -189,7 +202,8 @@ class: background-contain
 
 1. MCP tl;dr
 1. STDIO security profile
-1. HTTP authorization
+1. **HTTP authorization**
+1. What's next?
 
 ---
 
@@ -372,18 +386,23 @@ pre {
 - Client policies?
 - SSRF
     - No localhost support
-- Time-of-check to time-of-use (TOCTOU)
+- Lack of support from major players
+    - e.g. AWS Cognito, Microsoft EntraID, ...
+    - Keycloak: it's a work-in-progress ([#47765](https://github.com/keycloak/keycloak/issues/47765))
 
 
 </v-clicks>
 
-<v-click>
+---
 
-Keycloak: it's a work-in-progress ([#47765](https://github.com/keycloak/keycloak/issues/47765))
+## Authz and Security for MCP
 
-</v-click>
+<br>
 
-
+1. MCP tl;dr
+1. STDIO security profile
+1. HTTP authorization
+1. **What's next?**
 
 ---
 
@@ -423,6 +442,17 @@ Keycloak: it's a work-in-progress ([#47765](https://github.com/keycloak/keycloak
 
 </v-clicks>
 
+---
+
+## Where do we go from here?
+
+&nbsp;
+
+- STDIO wire format is being reworked
+    - Might be some shape or form of HTTP
+- CIMD is here to stay
+    - But not quite there yet
+- Authz gateways are the current workaround
 
 ---
 
