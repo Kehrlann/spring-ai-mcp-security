@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import org.springaicommunity.mcp.security.authorizationserver.config.LocalhostWildcardPortValidator;
 import org.springaicommunity.mcp.security.authorizationserver.config.McpAuthorizationServerConfigurer;
 import org.springaicommunity.mcp.security.common.url.DefaultUrlValidator;
+import org.springaicommunity.mcp.security.common.url.UrlValidator;
 import wf.garnier.mcp.security.demo.authorizationserver.user.DemoUser;
 import wf.garnier.mcp.security.demo.authorizationserver.user.DemoUserDetailsService;
 
@@ -37,6 +38,8 @@ class SecurityConfiguration {
 	private final Consumer<OAuth2ClientRegistrationAuthenticationContext> ALL_SCOPES_ALLOWED_VALIDATOR = DEFAULT_REDIRECT_URI_VALIDATOR
 		.andThen(DEFAULT_JWK_SET_URI_VALIDATOR);
 
+	private final UrlValidator urlValidator = new DefaultUrlValidator(true);
+
 	@Bean
 	Customizer<HttpSecurity> httpSecurityCustomizer() {
 		return http -> {
@@ -66,11 +69,9 @@ class SecurityConfiguration {
 	RegisteredClientRepository dcrRegisteredClientRepository(OAuth2AuthorizationServerProperties properties) {
 		var clients = new OAuth2AuthorizationServerPropertiesMapper(properties).asRegisteredClients();
 		var cimdRepo = new ClientIdMetadataDocumentRegisteredClientRepository();
-		var urlValidator = new DefaultUrlValidator(true);
-		cimdRepo.setClientIdUrlValidator(urlValidator);
-		cimdRepo.setMetadataValidator(new DefaultClientMetadataValidator(urlValidator));
-		return new DelegatingRegisteredClientRepository(
-				List.of(cimdRepo),
+		cimdRepo.setClientIdUrlValidator(this.urlValidator);
+		cimdRepo.setMetadataValidator(new DefaultClientMetadataValidator(this.urlValidator));
+		return new DelegatingRegisteredClientRepository(List.of(cimdRepo),
 				new InMemoryRegisteredClientRepository(clients));
 	}
 
