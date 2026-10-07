@@ -25,7 +25,7 @@ final class OAuth2AuthorizationServerPropertiesMapper {
 	OAuth2AuthorizationServerPropertiesMapper(OAuth2AuthorizationServerProperties properties) {
 		this.properties = properties;
 	}
-	
+
 	List<RegisteredClient> asRegisteredClients() {
 		List<RegisteredClient> registeredClients = new ArrayList<>();
 		this.properties.getClient()
