@@ -87,9 +87,9 @@ class SecurityConfiguration {
 			DemoUser user = (DemoUser) ctx.getPrincipal().getPrincipal();
 			ctx.getClaims().subject(user.getUserEmail());
 			ctx.getClaims().claim(StandardClaimNames.EMAIL, user.getUserEmail());
+			ctx.getClaims().claim(StandardClaimNames.NAME, user.getUsername());
 			if (ctx.getTokenType().getValue().equals(OidcParameterNames.ID_TOKEN)) {
 				ctx.getClaims().claim(StandardClaimNames.EMAIL_VERIFIED, true);
-				ctx.getClaims().claim(StandardClaimNames.NAME, user.getUsername());
 			}
 		};
 	}
